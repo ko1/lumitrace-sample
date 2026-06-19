@@ -16,8 +16,6 @@ jobs:
           ruby-version: "3.4"   # lumitrace needs Ruby 3.4+
           bundler-cache: true
 
-      - run: bin/rails db:test:prepare   # before tracing, so it isn't traced
-
       # --- lumitrace: bracket the existing test step, command unchanged ---
       - uses: ko1/lumitrace/action/setup@v1
         with:
