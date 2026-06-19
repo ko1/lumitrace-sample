@@ -62,4 +62,9 @@ class Cart
       total: total
     }
   end
+
+  def dummy_method
+    "this is dummy line"
+  end
 end
+
