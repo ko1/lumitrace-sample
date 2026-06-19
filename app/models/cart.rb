@@ -2,7 +2,7 @@
 # Deliberately full of small branches and varied value types so lumitrace has
 # something interesting to show on a PR: integers, floats, booleans, arrays.
 class Cart
-  FREE_SHIPPING_THRESHOLD = 5_000
+  FREE_SHIPPING_THRESHOLD = 4_000
   TAX_RATE = 0.10
 
   Item = Struct.new(:name, :price, :qty) do
@@ -62,4 +62,9 @@ class Cart
       total: total
     }
   end
+
+  def dummy_method
+    subtotal * 2
+  end
 end
+
