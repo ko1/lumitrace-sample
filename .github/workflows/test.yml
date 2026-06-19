@@ -4,6 +4,7 @@ on: pull_request
 permissions:
   checks: write     # let the report action post the Check Run
   contents: read
+  id-token: write   # OIDC token to authenticate the report upload
 
 jobs:
   test:
@@ -24,4 +25,4 @@ jobs:
       - run: bin/rails test
 
       - uses: ko1/lumitrace/action/report@v1
-        if: always()
+        if: always()   # id-token: write above uploads the report to lumitrace.atdot.net

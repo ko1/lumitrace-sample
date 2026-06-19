@@ -21,7 +21,7 @@ class Cart
   end
 
   def subtotal
-    @items.sum(&:amount)
+    @items.sum { |item| item.amount }
   end
 
   # Tiered discount rate based on subtotal.
