@@ -64,7 +64,7 @@ class Cart
   end
 
   def dummy_method
-    "this is dummy line"
+    subtotal * 2
   end
 end
 
