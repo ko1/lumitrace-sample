@@ -23,8 +23,6 @@ jobs:
           collect-mode: last   # demo: show recorded values
 
       - run: bin/rails test
-        env:
-          LUMITRACE_VERBOSE: "2"   # TEMP: diagnose why 0 expressions traced in CI
 
       - uses: ko1/lumitrace/action/report@v1
         if: always()   # id-token: write above uploads the report to lumitrace.atdot.net
