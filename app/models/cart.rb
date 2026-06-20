@@ -50,7 +50,8 @@ class Cart
   end
 
   def total
-    subtotal - discount + tax + shipping
+    net = subtotal - discount
+    net + tax + shipping
   end
 
   def summary
