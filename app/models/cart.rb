@@ -64,8 +64,9 @@ class Cart
     }
   end
 
-  def dummy_method
-    subtotal * 2
+  # Not called by any test — shows up as an uncovered (never executed) line.
+  def projected_total(months)
+    total * months
   end
 end
 
