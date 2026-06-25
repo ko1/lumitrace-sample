@@ -2,8 +2,9 @@ name: test
 on: pull_request
 
 permissions:
-  checks: write     # let the report action post the Check Run
+  checks: write     # post the Check Run
   contents: read
+  id-token: write   # upload the report to lumitrace.atdot.net
 
 jobs:
   test:
