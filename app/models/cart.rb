@@ -63,8 +63,24 @@ class Cart
     }
   end
 
-  def dummy_method
-    subtotal * 2
+  # Loyalty points: 1 point per ¥100 of the final total.
+  def points
+    total / 100
+  end
+
+  # Apply a percentage coupon on top of the tier discount.
+  def apply_coupon(coupon)
+    coupon.discount_for(subtotal - discount)
+  end
+
+  # Rough delivery estimate from the total item count. Not exercised by the
+  # tests in this PR, so lumitrace flags these as uncovered changed lines.
+  def estimated_delivery_days
+    units = @items.sum(&:qty)
+    case units
+    when 0..2 then 1
+    when 3..9 then 2
+    else 4
+    end
   end
 end
-
