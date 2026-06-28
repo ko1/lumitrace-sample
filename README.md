@@ -16,11 +16,11 @@ the existing `bin/rails test` step, plus a `permissions:` block — the test
 command itself is unchanged:
 
 ```yaml
-- uses: ko1/lumitrace/action/setup@v1
+- uses: ko1/lumitrace-action/setup@v1
   with:
     collect-mode: last
 - run: bin/rails test
-- uses: ko1/lumitrace/action/report@v1
+- uses: ko1/lumitrace-action/report@v1
   if: always()
 ```
 
