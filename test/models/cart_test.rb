@@ -14,7 +14,7 @@ class CartTest < ActiveSupport::TestCase
     cart = Cart.new.add("book", 1_500, 4) # subtotal 6_000
     assert_equal 0.05, cart.discount_rate
     assert_equal 300, cart.discount        # 6000 * 0.05
-    assert cart.free_shipping?             # 5700 >= 5000
+    assert cart.free_shipping?             # 5700 >= 4000
     assert_equal 0, cart.shipping
     assert_equal 570, cart.tax             # (6000-300)*0.10
     assert_equal 6_270, cart.total
@@ -26,5 +26,12 @@ class CartTest < ActiveSupport::TestCase
     assert_equal 2, summary[:items]
     assert_equal 5_000, summary[:subtotal]
     assert_includes [true, false], summary[:free_shipping]
+  end
+
+  test "coupon and loyalty points" do
+    cart = Cart.new.add("book", 1_500, 4) # subtotal 6_000, discount 300
+    coupon = Coupon.new("SAVE10", 10)
+    assert_equal 570, cart.apply_coupon(coupon)  # (6000 - 300) * 10%
+    assert_equal 62, cart.points                 # total 6_270 / 100
   end
 end
