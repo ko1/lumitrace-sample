@@ -18,9 +18,9 @@ jobs:
           bundler-cache: true
 
       # --- lumitrace: bracket the existing test step, command unchanged ---
-      - uses: ko1/lumitrace/action/setup@v1   # default collect-mode: types (no raw values)
+      - uses: ko1/lumitrace-action/setup@v1   # default collect-mode: types (no raw values)
 
       - run: bin/rails test
 
-      - uses: ko1/lumitrace/action/report@v1
+      - uses: ko1/lumitrace-action/report@v1
         if: always()
