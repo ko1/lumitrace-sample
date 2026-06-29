@@ -1,6 +1,4 @@
 # A plain-Ruby domain model (autoloaded by Rails from app/models).
-# Deliberately full of small branches and varied value types so lumitrace has
-# something interesting to show on a PR: integers, floats, booleans, arrays.
 class Cart
   FREE_SHIPPING_THRESHOLD = 4_000
   TAX_RATE = 0.10
@@ -24,7 +22,6 @@ class Cart
     @items.sum(&:amount)
   end
 
-  # Tiered discount rate based on subtotal.
   def discount_rate
     case subtotal
     when 0...3_000 then 0.0
@@ -53,18 +50,18 @@ class Cart
     subtotal - discount + tax + shipping
   end
 
-  def summary
-    {
-      items: @items.size,
-      subtotal: subtotal,
-      discount: discount,
-      free_shipping: free_shipping?,
-      total: total
-    }
+  # Loyalty points: 1 point per ¥100 of the final total. (covered by cart_test)
+  def points
+    total / 100
   end
 
-  def dummy_method
-    subtotal * 2
+  # Delivery estimate — not exercised by any shard, stays uncovered after merge.
+  def estimated_delivery_days
+    units = @items.sum(&:qty)
+    case units
+    when 0..2 then 1
+    when 3..9 then 2
+    else 4
+    end
   end
 end
-
