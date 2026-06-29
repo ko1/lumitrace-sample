@@ -31,7 +31,7 @@ jobs:
           include-hidden-files: true
           if-no-files-found: ignore
 
-  lumitrace:
+  lumitrace-merge:
     needs: test
     if: always()
     runs-on: ubuntu-latest
